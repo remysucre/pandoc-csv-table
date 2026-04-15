@@ -95,7 +95,9 @@ When using markdown in table cells, enclose the entire table within a code block
 ~~~markdown
 ::: table
 ```
-...
+Name,Link,Notes
+Alice,[GitHub](https://github.com/alice),**maintainer**
+Bob,[GitHub](https://github.com/bob),`on leave`
 ```
 :::
 ~~~
