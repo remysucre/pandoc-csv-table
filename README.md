@@ -40,7 +40,7 @@ Bob,25,Los Angeles
 
 ## Examples
 
-**With attributes:**
+With attributes:
 
 ```markdown
 ::: {.table caption="Results" align="l,r,c"}
@@ -50,7 +50,7 @@ Bob,82,active
 :::
 ```
 
-**Quoted fields with commas and line breaks:**
+Quoted fields with commas and line breaks:
 
 ```markdown
 ::: table
@@ -60,7 +60,7 @@ Bob,Programmer
 :::
 ```
 
-**Custom quote character:**
+Custom quote character:
 
 ```markdown
 ::: {.table quote="'"}
@@ -70,7 +70,7 @@ Bob,'plain, field'
 :::
 ```
 
-**Backslash escaping, no header, aligned columns:**
+Backslash escaping, no header, aligned columns:
 
 ```markdown
 ::: {.table escape="\\" header="false" align="l,r,r"}
