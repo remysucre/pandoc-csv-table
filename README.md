@@ -28,17 +28,15 @@ Bob,25,Los Angeles
 | `caption` / `title` | *(none)* | Table caption; supports inline Markdown |
 | `align` / `aligns` | `d` | Comma-separated per-column alignment: `l` `r` `c` `d` |
 
-### Delimiter note
+> [!CAUTION]
+> Pandoc's Markdown reader expands tab characters to spaces before the filter
+> runs, so `delimiter="\t"` only works when pandoc is given a pre-parsed AST or
+> a non-Markdown input format. For visually-aligned columns in Markdown source,
+> use `|` as the delimiter instead.
 
-Pandoc's Markdown reader expands tab characters to spaces before the filter
-runs, so `delimiter="\t"` only works when pandoc is given a pre-parsed AST or
-a non-Markdown input format. For visually-aligned columns in Markdown source,
-use `|` as the delimiter instead.
-
-### Escape character note
-
-In Markdown attribute syntax a literal backslash must be doubled:
-`escape="\\"` gives `\` as the escape character.
+> [!CAUTION]
+> In Markdown attribute syntax a literal backslash must be doubled:
+> `escape="\\"` gives `\` as the escape character.
 
 ## Examples
 
