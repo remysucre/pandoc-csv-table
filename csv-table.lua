@@ -72,17 +72,20 @@ local function build_csv_pattern(opts)
   -- pCSVCell
   local cell_pat = quoted_cell_pat + unquoted_cell_pat
 
-  -- pCSVDelim — delimiter + optional whitespace stripping
-  -- Mirrors Haskell: tab delimiter skips trailing spaces only;
-  -- other delimiters skip spaces and tabs (unless keep_space).
-  local delim_pat
+  -- pCSVDelim — optional pre-whitespace + delimiter + optional post-whitespace.
+  -- Pre-delimiter spaces are always stripped (handles column-aligned CSV where
+  -- fields are padded to line up commas).  Post-delimiter whitespace is stripped
+  -- unless keep_space is set (mirrors Haskell's csvKeepSpace behaviour).
+  local pre  = S(" \t")^0
+  local post
   if keep_space then
-    delim_pat = delim
+    post = P(true)
   elseif delim_char == "\t" then
-    delim_pat = delim * P(" ")^0
+    post = P(" ")^0
   else
-    delim_pat = delim * S(" \t")^0
+    post = S(" \t")^0
   end
+  local delim_pat = pre * delim * post
 
   -- pCSVRow — one cell, followed by zero or more (delimiter + cell) pairs.
   -- Note: the Haskell version requires many1 extra cells when the first cell
@@ -235,15 +238,17 @@ local function extract_csv_text(blocks)
     end
   end
 
-  -- Fallback: stitch together paragraph inlines
+  -- Fallback: stitch together paragraph inlines.
+  -- Only handles plain text; use a ``` code fence inside the div for CSV
+  -- containing quoted fields, as pandoc transforms quotes into Quoted inlines.
   local lines = {}
   for _, block in ipairs(blocks) do
     if block.t == "Para" or block.t == "Plain" then
       local parts = {}
       for _, inline in ipairs(block.content) do
         local t = inline.t
-        if     t == "Str"                        then table.insert(parts, inline.text)
-        elseif t == "Space"                      then table.insert(parts, " ")
+        if     t == "Str"      then table.insert(parts, inline.text)
+        elseif t == "Space"    then table.insert(parts, " ")
         elseif t == "SoftBreak" or t == "LineBreak" then table.insert(parts, "\n")
         end
       end
@@ -264,7 +269,7 @@ local function make_cell(text, align)
   if trimmed == "" then
     content = { pandoc.Plain({}) }
   else
-    local doc = pandoc.read(trimmed, "markdown")
+    local doc = pandoc.read(trimmed, "markdown-smart")
     content = doc.blocks
     if #content == 0 then
       content = { pandoc.Plain({}) }

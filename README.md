@@ -52,32 +52,38 @@ Bob  , 82    , active
 
 Quoted fields with commas and line breaks:
 
-```markdown
+~~~markdown
 ::: table
+```
 Name , Bio
 Alice, "Singer, songwriter, and actress"
 Bob  , Programmer
-:::
 ```
+:::
+~~~
 
 Custom quote character:
 
-```markdown
+~~~markdown
 ::: {.table quote="'"}
+```
 Name , Note
 Alice, 'She said ''hello'''
 Bob  , 'plain, field'
-:::
 ```
+:::
+~~~
 
 Backslash escaping, no header, aligned columns:
 
-```markdown
+~~~markdown
 ::: {.table escape="\\" header="false" align="l,r,r"}
+```
 Widget A, "$1,234", active
 Widget B, "$567"  , "on hold"
-:::
 ```
+:::
+~~~
 
 ## CSV parsing
 
