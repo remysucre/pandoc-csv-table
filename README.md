@@ -22,14 +22,14 @@ Bob  , 25  , Los Angeles
 |---|---|---|
 | `delimiter` / `delim` / `sep` | `,` | Field delimiter character |
 | `quote` | `"` | Quote character; `"none"` to disable quoting |
-| `escape` | *(none)* | Escape character inside quoted fields; default uses doubled-quote (`""` → `"`) |
+| `escape` | None | Escape character inside quoted fields; default uses doubled-quote (`""` → `"`) |
 | `keep-space` / `keepspace` | `false` | `"true"` to preserve whitespace after the delimiter |
 | `header` | `true` | `"false"` to treat all rows as data (no header row) |
-| `caption` / `title` | *(none)* | Table caption; supports inline Markdown |
+| `caption` / `title` | None | Table caption; supports inline Markdown |
 | `align` / `aligns` | `d` | Comma-separated per-column alignment: `l` `r` `c` `d` |
 
 > [!TIP]
-> Try wrapping table in `` ``` `` fences for parsing errors:
+> Try wrapping table in `` ``` `` fences to fix parse errors:
 
 ~~~markdown
 ::: table
