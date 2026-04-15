@@ -1,8 +1,4 @@
-# csv-table.lua
-
-Pandoc Lua filter that converts fenced-div CSV into a native `pandoc.Table`.
-
-Requires pandoc ≥ 2.17.
+Lua filter for making Pandoc tables with CSV fenced-divs.
 
 ## Usage
 
@@ -10,29 +6,15 @@ Requires pandoc ≥ 2.17.
 pandoc doc.md --lua-filter csv-table.lua -o doc.html
 ```
 
-Mark a div with the `table` class and put your CSV in a fenced code block inside it:
+Write CSV directly inside a `table` div:
 
-~~~markdown
+```markdown
 ::: table
-```
 Name,Age,City
 Alice,30,New York
 Bob,25,Los Angeles
+:::
 ```
-:::
-~~~
-
-Both `::: table` and `::: {.table}` work.
-
-For simple data (no commas in values) the code fence is optional:
-
-~~~markdown
-::: {.table delimiter="|" caption="Results" align="l,r,c"}
-Name|Score|Grade
-Alice|95|A
-Bob|82|B
-:::
-~~~
 
 ## Attributes
 
@@ -60,40 +42,44 @@ In Markdown attribute syntax a literal backslash must be doubled:
 
 ## Examples
 
+**With attributes:**
+
+```markdown
+::: {.table caption="Results" align="l,r,c"}
+Name,Score,Status
+Alice,95,active
+Bob,82,active
+:::
+```
+
 **Quoted fields with commas and line breaks:**
 
-~~~markdown
-::: {.table caption="People"}
-```
+```markdown
+::: table
 Name,Bio
 Alice,"Singer, songwriter, and actress"
 Bob,Programmer
-```
 :::
-~~~
+```
 
 **Custom quote character:**
 
-~~~markdown
+```markdown
 ::: {.table quote="'"}
-```
 Name,Note
 Alice,'She said ''hello'''
 Bob,'plain, field'
-```
 :::
-~~~
+```
 
 **Backslash escaping, no header, aligned columns:**
 
-~~~markdown
+```markdown
 ::: {.table escape="\\" header="false" align="l,r,r"}
-```
 Widget A,"$1,234",active
 Widget B,"$567","on hold"
-```
 :::
-~~~
+```
 
 ## CSV parsing
 
@@ -105,3 +91,13 @@ The LPeg grammar mirrors [`Text.Pandoc.CSV`](https://github.com/jgm/pandoc/blob/
 - Trailing whitespace/newlines after the last row are consumed silently.
 
 Cell text is parsed as Markdown, so cells can contain **bold**, `code`, [links](url), etc.
+When using markdown in table cells, enclose the entire table within a code block to disambiguate:
+
+
+~~~markdown
+::: table
+```
+...
+```
+:::
+~~~
