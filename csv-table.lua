@@ -1,6 +1,3 @@
--- csv-table.lua — Pandoc Lua filter: .table fenced divs → pandoc.Table
--- See README.md for usage and attribute reference.
-
 local lpeg = require("lpeg")
 local P, S, C, Cs, Ct = lpeg.P, lpeg.S, lpeg.C, lpeg.Cs, lpeg.Ct
 
