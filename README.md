@@ -1,4 +1,4 @@
-Lua filter for making Pandoc tables with CSV fenced-divs.
+Lua filter for making Pandoc tables with CSV.
 
 ## Usage
 
@@ -10,9 +10,9 @@ Write CSV directly inside a `table` div:
 
 ```markdown
 ::: table
-Name,Age,City
-Alice,30,New York
-Bob,25,Los Angeles
+Name , Age , City
+Alice, 30  , New York
+Bob  , 25  , Los Angeles
 :::
 ```
 
@@ -44,9 +44,9 @@ With attributes:
 
 ```markdown
 ::: {.table caption="Results" align="l,r,c"}
-Name,Score,Status
-Alice,95,active
-Bob,82,active
+Name , Score , Status
+Alice, 95    , active
+Bob  , 82    , active
 :::
 ```
 
@@ -54,9 +54,9 @@ Quoted fields with commas and line breaks:
 
 ```markdown
 ::: table
-Name,Bio
-Alice,"Singer, songwriter, and actress"
-Bob,Programmer
+Name , Bio
+Alice, "Singer, songwriter, and actress"
+Bob  , Programmer
 :::
 ```
 
@@ -64,9 +64,9 @@ Custom quote character:
 
 ```markdown
 ::: {.table quote="'"}
-Name,Note
-Alice,'She said ''hello'''
-Bob,'plain, field'
+Name , Note
+Alice, 'She said ''hello'''
+Bob  , 'plain, field'
 :::
 ```
 
@@ -74,8 +74,8 @@ Backslash escaping, no header, aligned columns:
 
 ```markdown
 ::: {.table escape="\\" header="false" align="l,r,r"}
-Widget A,"$1,234",active
-Widget B,"$567","on hold"
+Widget A, "$1,234", active
+Widget B, "$567"  , "on hold"
 :::
 ```
 
@@ -95,9 +95,9 @@ When using markdown in table cells, enclose the entire table within a code block
 ~~~markdown
 ::: table
 ```
-Name,Link,Notes
-Alice,[GitHub](https://github.com/alice),**maintainer**
-Bob,[GitHub](https://github.com/bob),`on leave`
+Name , Link                              , Notes
+Alice, [GitHub](https://github.com/alice), **maintainer**
+Bob  , [GitHub](https://github.com/bob)  , `on leave`
 ```
 :::
 ~~~
