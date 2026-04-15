@@ -28,7 +28,8 @@ Bob  , 25  , Los Angeles
 | `caption` / `title` | *(none)* | Table caption; supports inline Markdown |
 | `align` / `aligns` | `d` | Comma-separated per-column alignment: `l` `r` `c` `d` |
 
-Try wrapping table in `` ``` `` fences for parsing errors:
+> [!TIP]
+> Try wrapping table in `` ``` `` fences for parsing errors:
 
 ~~~markdown
 ::: table
