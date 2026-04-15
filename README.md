@@ -28,6 +28,18 @@ Bob  , 25  , Los Angeles
 | `caption` / `title` | *(none)* | Table caption; supports inline Markdown |
 | `align` / `aligns` | `d` | Comma-separated per-column alignment: `l` `r` `c` `d` |
 
+Try wrapping table in `` ``` `` fences for parsing errors:
+
+~~~markdown
+::: table
+```
+Name , Link                              , Notes
+Alice, [GitHub](https://github.com/alice), **maintainer**
+Bob  , [GitHub](https://github.com/bob)  , `on leave`
+```
+:::
+~~~
+
 > [!CAUTION]
 > Pandoc's Markdown reader expands tab characters to spaces before the filter
 > runs, so `delimiter="\t"` only works when pandoc is given a pre-parsed AST or
@@ -95,15 +107,3 @@ The LPeg grammar mirrors [`Text.Pandoc.CSV`](https://github.com/jgm/pandoc/blob/
 - Trailing whitespace/newlines after the last row are consumed silently.
 
 Cell text is parsed as Markdown, so cells can contain **bold**, `code`, [links](url), etc.
-When using markdown in table cells, enclose the entire table within a code block to disambiguate:
-
-
-~~~markdown
-::: table
-```
-Name , Link                              , Notes
-Alice, [GitHub](https://github.com/alice), **maintainer**
-Bob  , [GitHub](https://github.com/bob)  , `on leave`
-```
-:::
-~~~
