@@ -1,110 +1,95 @@
-Lua filter for making Pandoc tables with CSV.
+Pandoc Lua filter for creating tables with CSV code blocks.
+
+Requires Pandoc $\geq$ 3.2
 
 ## Usage
 
-```sh
-pandoc doc.md --lua-filter csv-table.lua -o doc.html
+```
+pandoc input.md --lua-filter csv-table.lua -o output.html
 ```
 
-Write CSV directly inside a `table` div:
+## Syntax
 
-```markdown
-::: table
-Name , Age , City
-Alice, 30  , New York
-Bob  , 25  , Los Angeles
-:::
+Write CSV in a fenced code block with class `csv`:
+
+````markdown
+```csv
+Name,Age,City
+Alice,30,NYC
+Bob,25,LA
 ```
+````
 
-## Attributes
+Specify options as code fence attributes:
 
-| Attribute | Default | Description |
-|---|---|---|
-| `delimiter` / `delim` / `sep` | `,` | Field delimiter character |
-| `quote` | `"` | Quote character; `"none"` to disable quoting |
-| `escape` | None | Escape character inside quoted fields; default uses doubled-quote (`""` → `"`) |
-| `keep-space` / `keepspace` | `false` | `"true"` to preserve whitespace after the delimiter |
-| `header` | `true` | `"false"` to treat all rows as data (no header row) |
-| `caption` / `title` | None | Table caption; supports inline Markdown |
-| `align` / `aligns` | `d` | Comma-separated per-column alignment: `l` `r` `c` `d` |
-
-> [!TIP]
-> Try wrapping table in `` ``` `` fences to fix parse errors:
-
-~~~markdown
-::: table
+````markdown
+```{.csv caption="**My Table**" header=false align=lcr widths=3,1,2 table-width=80% markdown=false}
+Name,Age,City
+Alice,30,NYC
 ```
-Name , Link                              , Notes
-Alice, [GitHub](https://github.com/alice), **maintainer**
-Bob  , [GitHub](https://github.com/bob)  , `on leave`
-```
-:::
-~~~
+````
 
-> [!CAUTION]
-> Pandoc's Markdown reader expands tab characters to spaces before the filter
-> runs, so `delimiter="\t"` only works when pandoc is given a pre-parsed AST or
-> a non-Markdown input format. For visually-aligned columns in Markdown source,
-> use `|` as the delimiter instead.
+CSV content must conform to [RFC4180](https://www.ietf.org/rfc/rfc4180.txt),
+ otherwise use tools like [DuckDB](https://duckdb.org/2023/10/27/csv-sniffer) to clean data before using.
 
-> [!CAUTION]
-> In Markdown attribute syntax a literal backslash must be doubled:
-> `escape="\\"` gives `\` as the escape character.
+## Options
+
+| Option | Values | Description |
+|--------|--------|-------------|
+| `file` | path | Load CSV from a file instead of inline content |
+| `caption` | string | Table caption (supports markdown) |
+| `header` | `true` / `false` | Treat first row as header (default: `true`) |
+| `align` | string of `l` `c` `r` `d` | Column alignments, one per column |
+| `widths` | comma-separated numbers | Relative column widths, normalized to fractions |
+| `table-width` | CSS value | Overall table width (e.g. `80%`, `500px`) |
+| `markdown` | `true` / `false` | Parse cell content as markdown (default: `true`) |
 
 ## Examples
 
-With attributes:
+### Basic table
 
-```markdown
-::: {.table caption="Results" align="l,r,c"}
-Name , Score , Status
-Alice, 95    , active
-Bob  , 82    , active
-:::
+````markdown
+```csv
+Name,Age,City
+Alice,30,NYC
+Bob,25,LA
 ```
+````
 
-Quoted fields with commas and line breaks:
+### From a file
 
-~~~markdown
-::: table
+````markdown
+```{.csv file=data.csv}
 ```
-Name , Bio
-Alice, "Singer, songwriter, and actress"
-Bob  , Programmer
+````
+
+### With options
+
+````markdown
+```{.csv caption="*Staff* list" align=lcc widths=3,1,1 header=true}
+Name,Age,City
+Alice,30,NYC
+Bob,25,"Los Angeles, CA"
 ```
-:::
-~~~
+````
 
-Custom quote character:
+### Markdown in cells
 
-~~~markdown
-::: {.table quote="'"}
+Cell content is parsed as markdown by default:
+
+````markdown
+```csv
+**Name**,Score
+*Alice*,`100`
 ```
-Name , Note
-Alice, 'She said ''hello'''
-Bob  , 'plain, field'
+````
+
+### No header, fixed table width
+
+````markdown
+```{.csv header=false table-width=60%}
+Key,Value
+timeout,30s
+retries,3
 ```
-:::
-~~~
-
-Backslash escaping, no header, aligned columns:
-
-~~~markdown
-::: {.table escape="\\" header="false" align="l,r,r"}
-```
-Widget A, "$1,234", active
-Widget B, "$567"  , "on hold"
-```
-:::
-~~~
-
-## CSV parsing
-
-The LPeg grammar mirrors [`Text.Pandoc.CSV`](https://github.com/jgm/pandoc/blob/main/src/Text/Pandoc/CSV.hs):
-
-- Quoted cells may span multiple lines.
-- Inside a quoted cell, the escape character (if set) prefixes a literal character; otherwise consecutive quote chars collapse to one (`""` → `"`).
-- Blank lines terminate the row sequence, matching Parsec's `sepEndBy` behaviour for `pCSVRow`.
-- Trailing whitespace/newlines after the last row are consumed silently.
-
-Cell text is parsed as Markdown, so cells can contain **bold**, `code`, [links](url), etc.
+````
