@@ -1,6 +1,5 @@
-Pandoc Lua filter for creating tables with CSV code blocks.
+Pandoc (requires 3.2 or later) filter for creating tables with CSV code blocks.
 
-Requires Pandoc 3.2 or later.
 
 ## Usage
 
