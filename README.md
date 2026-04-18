@@ -8,8 +8,6 @@ Pandoc[^1] filter for creating tables with CSV code blocks.
 pandoc input.md --lua-filter csv-table.lua -o output.html
 ```
 
-## Syntax
-
 Write CSV in a fenced code block:
 
 ````markdown
@@ -38,8 +36,6 @@ Kira,7,Hawaii
 
 CSV content must conform to [RFC4180](https://www.ietf.org/rfc/rfc4180.txt),
  otherwise use tools like [DuckDB](https://duckdb.org/2023/10/27/csv-sniffer) to clean data before using.
-
-## Options
 
 | Option | Values | Description |
 |--------|--------|-------------|
