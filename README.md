@@ -15,8 +15,15 @@ Write CSV in a fenced code block with class `csv`:
 ````markdown
 ```csv
 Name,Age,City
-Alice,30,NYC
-Bob,25,LA
+Alice,30,__NYC__
+Bob,25,*LA*
+```
+````
+
+Or include data from a file:
+
+````markdown
+```{.csv file=data.csv}
 ```
 ````
 
@@ -24,8 +31,8 @@ Specify options as code fence attributes:
 
 ````markdown
 ```{.csv caption="**My Table**" header=false align=lcr widths=3,1,2 table-width=80% markdown=false}
-Name,Age,City
-Alice,30,NYC
+Casa,9,Seattle
+Kira,7,Hawaii
 ```
 ````
 
@@ -43,53 +50,3 @@ CSV content must conform to [RFC4180](https://www.ietf.org/rfc/rfc4180.txt),
 | `widths` | comma-separated numbers | Relative column widths, normalized to fractions |
 | `table-width` | CSS value | Overall table width (e.g. `80%`, `500px`) |
 | `markdown` | `true` / `false` | Parse cell content as markdown (default: `true`) |
-
-## Examples
-
-### Basic table
-
-````markdown
-```csv
-Name,Age,City
-Alice,30,NYC
-Bob,25,LA
-```
-````
-
-### From a file
-
-````markdown
-```{.csv file=data.csv}
-```
-````
-
-### With options
-
-````markdown
-```{.csv caption="*Staff* list" align=lcc widths=3,1,1 header=true}
-Name,Age,City
-Alice,30,NYC
-Bob,25,"Los Angeles, CA"
-```
-````
-
-### Markdown in cells
-
-Cell content is parsed as markdown by default:
-
-````markdown
-```csv
-**Name**,Score
-*Alice*,`100`
-```
-````
-
-### No header, fixed table width
-
-````markdown
-```{.csv header=false table-width=60%}
-Key,Value
-timeout,30s
-retries,3
-```
-````
