@@ -1,4 +1,4 @@
-Pandoc[^1] filter for creating tables with CSV code blocks.
+Pandoc[^1] filter for creating tables with CSV.
 
 [^1]: Requires Pandoc 3.2 or later.
 
