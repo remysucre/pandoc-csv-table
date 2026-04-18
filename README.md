@@ -1,4 +1,4 @@
-Pandoc (requires 3.2 or later) filter for creating tables with CSV code blocks.
+Pandoc^[Requires Pandoc 3.2 or later.] filter for creating tables with CSV code blocks.
 
 
 ## Usage
@@ -9,7 +9,7 @@ pandoc input.md --lua-filter csv-table.lua -o output.html
 
 ## Syntax
 
-Write CSV in a fenced code block with class `csv`:
+Write CSV in a fenced code block:
 
 ````markdown
 ```csv
