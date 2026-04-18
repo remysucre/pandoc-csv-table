@@ -2,8 +2,6 @@ Pandoc[^1] filter for creating tables with CSV code blocks.
 
 [^1]: Requires Pandoc 3.2 or later.
 
-## Usage
-
 ```
 pandoc input.md --lua-filter csv-table.lua -o output.html
 ```
