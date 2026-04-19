@@ -11,9 +11,9 @@ Write CSV in a fenced code block:
 
 ````markdown
 ```csv
-Name,Age,City
-Alice,30,__NYC__
-Bob,25,*LA*
+Name  , Age , City
+Alice , 30  , __NYC__
+Bob   , 25  , *LA*
 ```
 ````
 
@@ -28,8 +28,8 @@ Specify options as code fence attributes:
 
 ````markdown
 ```{.csv caption="**My Table**" header=false align=lcr widths=3,1,2 tablewidth=80% markdown=false}
-Casa,9,Seattle
-Kira,7,Hawaii
+Casa , 9 , Seattle
+Kira , 7 , Hawaii
 ```
 ````
 
