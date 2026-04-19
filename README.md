@@ -1,5 +1,5 @@
 Pandoc[^1] filter for creating tables with CSV.
-Format must conform to [RFC4180](https://www.ietf.org/rfc/rfc4180.txt),
+Format must conform to [CSV standard](#csv-syntax),
  otherwise clean data with tools like [DuckDB](https://duckdb.org/2023/10/27/csv-sniffer).
 
 [^1]: Requires Pandoc 3.2 or later.
@@ -43,3 +43,15 @@ Kira,7,Hawaii
 | `widths`/`w`        | Relative column widths             | `4,4,2`          |
 | `tablewidth`/`tw`   | Overall table width                | `80%`, `500px`   |
 | `markdown`/`md`     | Parse table cells as markdown?     | `true` (default) |
+
+## CSV Format
+
+CSV content follows [RFC 4180](https://www.ietf.org/rfc/rfc4180.txt):
+
+- Delimiter must be `,`
+- Fields containing a comma, double quote, or newline must be wrapped in double quotes `"`
+- Double quotes inside a quoted field are escaped by doubling: `"say ""hello"""`
+- No trailing spaces[^2]  before `,`
+- Every row must have the same number of fields
+
+[^2]: One relaxation from the standard is that spaces are allowed after `,` to help align columns in source.
