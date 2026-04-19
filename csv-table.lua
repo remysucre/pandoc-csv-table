@@ -1,6 +1,15 @@
 function CodeBlock(block)
   if block.classes:includes('csv') then
-    local attrs = block.attr.attributes
+    local a = block.attr.attributes
+    local attrs = {
+      file       = a.file    or a.f,
+      caption    = a.caption or a.cap,
+      header     = a.header  or a.h,
+      align      = a.align   or a.a,
+      widths     = a.widths  or a.w,
+      tablewidth = a.tablewidth or a.tw,
+      markdown   = a.markdown or a.md,
+    }
     local csv = block.text
     if attrs.file then
       local f = assert(io.open(attrs.file, 'r'))
@@ -9,8 +18,8 @@ function CodeBlock(block)
     end
     local tbl = pandoc.read(csv, 'csv').blocks[1]
 
-    if attrs['table-width'] then
-      tbl.attr.attributes['style'] = 'width: ' .. attrs['table-width']
+    if attrs.tablewidth then
+      tbl.attr.attributes['style'] = 'width: ' .. attrs.tablewidth
     end
 
     if attrs.widths then

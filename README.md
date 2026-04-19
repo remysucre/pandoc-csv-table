@@ -35,12 +35,12 @@ Kira,7,Hawaii
 CSV content must conform to [RFC4180](https://www.ietf.org/rfc/rfc4180.txt),
  otherwise use tools like [DuckDB](https://duckdb.org/2023/10/27/csv-sniffer) to clean data before using.
 
-| Option | Values | Description |
+| Option | Example | Description |
 |--------|--------|-------------|
-| `file` | path | Load CSV from a file instead of inline content |
-| `caption` | string | Table caption (supports markdown) |
-| `header` | `true` / `false` | Treat first row as header (default: `true`) |
-| `align` | string of `l` `c` `r` `d` | Column alignments, one per column |
-| `widths` | comma-separated numbers | Relative column widths, normalized to fractions |
-| `table-width` | CSS value | Overall table width (e.g. `80%`, `500px`) |
-| `markdown` | `true` / `false` | Parse cell content as markdown (default: `true`) |
+| `file`/`f` | `data.csv` | Load CSV from a file instead of inline content |
+| `caption`/`cap` | "*Experiment*" | Table caption (supports markdown) |
+| `header`/`h` | `true` (default) | Treat first row as header (default: `true`) |
+| `align`/`a` | `lcrd` | Column alignments, `d` for default  |
+| `widths`/`w` | `4,4,2` | Relative column widths, normalized to fractions |
+| `table-width`/`tw` | `80%`, `500px` | Overall table width |
+| `markdown`/`md` | `true` (default) | Parse cell content as markdown? |
