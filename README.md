@@ -1,3 +1,5 @@
+# Pansv
+
 Pandoc[^1] filter for creating tables with CSV.
 Format must conform to [CSV standard](#csv-syntax),
  otherwise clean data with tools like [DuckDB](https://duckdb.org/2023/10/27/csv-sniffer).
