@@ -1,4 +1,6 @@
 Pandoc[^1] filter for creating tables with CSV.
+Format must conform to [RFC4180](https://www.ietf.org/rfc/rfc4180.txt),
+ otherwise clean data with tools like [DuckDB](https://duckdb.org/2023/10/27/csv-sniffer).
 
 [^1]: Requires Pandoc 3.2 or later.
 
@@ -31,9 +33,6 @@ Casa,9,Seattle
 Kira,7,Hawaii
 ```
 ````
-
-CSV content must conform to [RFC4180](https://www.ietf.org/rfc/rfc4180.txt),
- otherwise use tools like [DuckDB](https://duckdb.org/2023/10/27/csv-sniffer) to clean data before using.
 
 | Option              | Description                        | Example          |
 |---------------------|------------------------------------|------------------|
