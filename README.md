@@ -38,9 +38,9 @@ CSV content must conform to [RFC4180](https://www.ietf.org/rfc/rfc4180.txt),
 | Option | Example | Description |
 |--------|--------|-------------|
 | `file`/`f` | `data.csv` | Load CSV from a file instead of inline content |
-| `caption`/`cap` | "*Experiment*" | Table caption (supports markdown) |
+| `caption`/`cap` | `*Experiment*` | Table caption (supports markdown) |
 | `header`/`h` | `true` (default) | Treat first row as header (default: `true`) |
 | `align`/`a` | `lcrd` | Column alignments, `d` for default  |
 | `widths`/`w` | `4,4,2` | Relative column widths, normalized to fractions |
 | `table-width`/`tw` | `80%`, `500px` | Overall table width |
-| `markdown`/`md` | `true` (default) | Parse cell content as markdown? |
+| `markdown`/`md` | `true` (default) | Parse table cells as markdown? |
