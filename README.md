@@ -53,7 +53,5 @@ CSV content follows [RFC 4180](https://www.ietf.org/rfc/rfc4180.txt):
 - Delimiter must be `,`
 - Fields containing a comma, double quote, or newline must be wrapped in double quotes `"`
 - Double quotes inside a quoted field are escaped by doubling: `"say ""hello"""`
-- No trailing spaces[^2]  before `,`
+- No trailing spaces after a quoted field
 - Every row must have the same number of fields
-
-[^2]: One relaxation from the standard is that spaces are allowed after `,` to help align columns in source.
