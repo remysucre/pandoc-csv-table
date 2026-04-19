@@ -1,6 +1,5 @@
 Pandoc filter for creating tables with CSV.
-Format must conform to [CSV standard](#csv-format),
- otherwise clean data with tools like [DuckDB](https://duckdb.org/2023/10/27/csv-sniffer).
+Format must conform to [CSV standard](#csv-format).
 Requires Pandoc 3.2 or later.
 
 ```
